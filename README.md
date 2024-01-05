@@ -2,7 +2,15 @@
 
 Your typical Next.js starter project... but more...
 
+## Original
+
+This repo was derived from this [Original Next Starter Kit](https://github.com/vercel/nextjs-subscription-payments) provided by the Vercel team. All credits go to them.
+
 ## What's in this Starter Project?
+
+This starter kit aims to keep the initial state of a Next.js create project, but adds the additional features for Supabase and Stripe that uses the latest Next 14 with Server Actions.
+
+> The entire layout and naming conventions are completely "subjective". Please modify to your preferences.
 
 ### Configuration
 
@@ -27,8 +35,11 @@ Your typical Next.js starter project... but more...
 - actions: for your server actions
 - sample pages in /app: for your app routing
 - components: contains a example layout + button component
-- utils: use this for general 3rd party integrations
-  - server.ts: middleware for typescript usage
+- fixtures: this is used to create sample stripe pricing product options
+- public: store your svg images here
+- supabase: dedicated supabase database directory to manager migrations and schemas
+- types: store your types here
+- utils: use these helpers for general 3rd party integrations (i.e stripe & supabase)
 - .env.local: for local environment variables
 
 # Your Typical Next.js ReadMe Below...

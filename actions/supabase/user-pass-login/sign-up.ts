@@ -18,10 +18,10 @@ export default async function signIn(email: any, password: any): Promise<void> {
   });
 
   if (error) {
-    return redirect("/login/user-pass?message=Could not authenticate user");
+    return redirect("/sign-in?message=Could not authenticate user");
   }
 
   return redirect(
-    "/login/user-pass?message=Check email to continue sign in process"
+    `${origin}`
   );
 }

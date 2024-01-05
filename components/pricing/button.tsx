@@ -1,45 +1,51 @@
-"use client";
+import React from "react";
 
-import React, { forwardRef, useRef, ButtonHTMLAttributes } from "react";
-
-import styles from "./Button.module.css";
-
-interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+type ButtonProps = {
   variant?: "slim" | "flat";
   active?: boolean;
   width?: number;
   loading?: boolean;
-  Component?: React.ComponentType;
-}
+  disabled?: boolean;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  children?: React.ReactNode;
+};
 
-const Button = forwardRef<HTMLButtonElement, Props>((props, buttonRef) => {
-  const {
-    className,
-    variant = "flat",
-    children,
-    active,
-    width,
-    loading = false,
-    disabled = false,
-    style = {},
-    Component = "button",
-    ...rest
-  } = props;
-
+const Button: React.FC<ButtonProps> = ({
+  variant = "flat",
+  children,
+  active,
+  width,
+  loading = false,
+  disabled = false,
+  onClick,
+}) => {
   return (
-    <Component
-      aria-pressed={active}
-      data-variant={variant}
+    <button
+      onClick={onClick}
+      className={`
+        ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
+        px-10 py-t rounded-md bg-blue-500  text-white transition ease-in-out duration-150 shadow-sm font-semibold text-center uppercase items-center
+        ${
+          variant === "flat"
+            ? "bg-white text-zinc-800 border border-transparent"
+            : ""
+        }
+        ${variant === "slim" ? "py-2 transform-none normal-case" : ""}
+        ${active ? "bg-blue-800 " : "hover:bg-blue-700"}
+        ${
+          loading
+            ? "bg-zinc-700 text-zinc-500 border-zinc-600 cursor-not-allowed"
+            : ""
+        }
+      `}
       disabled={disabled}
       style={{
         width,
-        ...style,
       }}
-      {...rest}
     >
       {children}
-    </Component>
+    </button>
   );
-});
+};
 
 export default Button;

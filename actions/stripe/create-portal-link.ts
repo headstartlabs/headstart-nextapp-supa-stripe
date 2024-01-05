@@ -1,13 +1,13 @@
-import { cookies, headers } from 'next/headers';
+'use server'
+import { cookies } from 'next/headers';
 import { createClient } from "@/utils/supabase/server";
 import { stripe } from '@/utils/stripe/server';
 import { createOrRetrieveCustomer } from '@/utils/supabase/supabase-admin';
 import { getURL } from '@/utils/helpers';
-import { Database } from '@/types/TSupabaseDatabase';
 
 
-export async function POST(req: Request) {
-  if (req.method === 'POST') {
+export async function createPortalLink() {
+
     try {
       const cookieStore = cookies();
       const supabase = createClient(cookieStore);
@@ -26,9 +26,7 @@ export async function POST(req: Request) {
         customer,
         return_url: `${getURL()}/account`
       });
-      return new Response(JSON.stringify({ url }), {
-        status: 200
-      });
+      return { url }; 
     } catch (err: any) {
       console.log(err);
       return new Response(
@@ -38,10 +36,5 @@ export async function POST(req: Request) {
         }
       );
     }
-  } else {
-    return new Response('Method Not Allowed', {
-      headers: { Allow: 'POST' },
-      status: 405
-    });
-  }
+  
 }
